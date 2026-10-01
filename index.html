@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoNaNa - Deliciosos Banana Chips</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Tone.js for web audio music -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'monana-yellow': '#FACC15',
+                        'monana-amber': '#F59E0B',
+                        'monana-brown': '#78350F',
+                        'monana-darkbrown': '#451A03',
+                        'monana-cream': '#FEF3C7',
+                        'monana-green': '#10B981',
+                        'monana-pink': '#F472B6'
+                    },
+                    fontFamily: {
+                        'title': ['Fredoka One', 'cursive'],
+                        'sans': ['Quicksand', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #FFFDF0;
+        }
+        .font-title {
+            font-family: 'Fredoka One', cursive;
+        }
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translate(0,  0px); }
+            50%  { transform: translate(0, 10px); }
+            100% { transform: translate(0, -0px); }
+        }
+        .pulse-slow {
+            animation: pulse 2.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FEF3C7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #F59E0B;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="text-monana-darkbrown min-h-screen flex flex-col justify-between selection:bg-monana-yellow selection:text-monana-darkbrown">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-md border-b-4 border-monana-yellow transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- LOGO BRAND -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="relative w-14 h-14 rounded-full bg-monana-cream border-2 border-monana-amber overflow-hidden flex items-center justify-center p-1 shadow-inner group-hover:scale-105 transition-transform">
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow">
+                        <!-- Curved Banana -->
+                        <path d="M 30,130 Q 90,195 170,110 Q 150,175 30,130 Z" fill="#FACC15" stroke="#78350F" stroke-width="4"/>
+                        <path d="M 25,130 C 20,125 15,115 22,110 C 28,110 32,120 30,130 Z" fill="#65A30D" stroke="#78350F" stroke-width="3"/>
+                        <path d="M 170,110 Q 175,100 178,115 Z" fill="#78350F"/>
+                        
+                        <!-- Monkey Head Behind/On Banana -->
+                        <ellipse cx="100" cy="85" rx="42" ry="38" fill="#92400E" stroke="#451A03" stroke-width="3"/>
+                        <!-- Monkey Ears -->
+                        <circle cx="58" cy="85" r="13" fill="#92400E" stroke="#451A03" stroke-width="3"/>
+                        <circle cx="58" cy="85" r="8" fill="#FDE68A"/>
+                        <circle cx="142" cy="85" r="13" fill="#92400E" stroke="#451A03" stroke-width="3"/>
+                        <circle cx="142" cy="85" r="8" fill="#FDE68A"/>
+                        <!-- Monkey Face Patch -->
+                        <path d="M 70,85 C 70,60 85,60 100,72 C 115,60 130,60 130,85 C 130,105 115,112 100,112 C 85,112 70,105 70,85 Z" fill="#FDE68A" stroke="#78350F" stroke-width="2"/>
+                        <!-- Hair Tuft -->
+                        <path d="M 95,48 Q 100,38 105,48 Q 110,40 108,48 Z" fill="#92400E"/>
+                        <!-- Cheeks & Eyes -->
+                        <circle cx="78" cy="92" r="5" fill="#F472B6" opacity="0.6"/>
+                        <circle cx="122" cy="92" r="5" fill="#F472B6" opacity="0.6"/>
+                        <!-- Happy Curved Eyes -->
+                        <path d="M 80,82 Q 87,74 94,82" fill="none" stroke="#451A03" stroke-width="3.5" stroke-linecap="round"/>
+                        <path d="M 106,82 Q 113,74 120,82" fill="none" stroke="#451A03" stroke-width="3.5" stroke-linecap="round"/>
+                        <!-- Nose and Smile -->
+                        <ellipse cx="100" cy="90" rx="3" ry="2" fill="#451A03"/>
+                        <path d="M 94,95 Q 100,102 106,95" fill="none" stroke="#451A03" stroke-width="3" stroke-linecap="round"/>
+                        <!-- Paws Holding Banana -->
+                        <ellipse cx="78" cy="116" rx="8" ry="6" fill="#FDE68A" stroke="#78350F" stroke-width="2"/>
+                        <ellipse cx="122" cy="116" rx="8" ry="6" fill="#FDE68A" stroke="#78350F" stroke-width="2"/>
+                        <!-- Tail Curved -->
+                        <path d="M 60,100 C 40,90 35,65 50,65 C 55,65 55,72 50,72 C 43,72 45,88 62,96 Z" fill="#92400E" stroke="#451A03" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div>
+                    <span class="font-title text-2xl md:text-3xl text-monana-brown tracking-wide leading-none block">MoNaNa</span>
+                    <span class="text-xs font-bold text-monana-amber tracking-widest uppercase block -mt-1">Banana Chips</span>
+                </div>
+            </a>
+
+            <!-- NAVIGATION LINKS -->
+            <nav class="hidden md:flex items-center gap-8 font-semibold">
+                <a href="#productos" class="hover:text-monana-amber transition-colors">SABORES</a>
+                <a href="#nosotros" class="hover:text-monana-amber transition-colors">NOSOTROS</a>
+                <a href="#juego" class="hover:text-monana-amber transition-colors flex items-center gap-1 text-monana-amber">
+                    <i class="fa-solid font-bold fa-gamepad"></i> MINI JUEGO
+                </a>
+                <a href="#contacto" class="hover:text-monana-amber transition-colors">CONTACTO</a>
+            </nav>
+
+            <!-- RIGHT CONTROLS (MUSIC & CART) -->
+            <div class="flex items-center gap-3">
+                <!-- AUDIO CONTROLLER BUTTON -->
+                <button id="musicToggleBtn" onclick="toggleMusic()" class="relative bg-amber-100 hover:bg-amber-200 text-monana-brown p-3 rounded-full transition-all shadow-sm flex items-center gap-2 border border-monana-amber" title="Música Tropical">
+                    <i id="musicIcon" class="fa-solid fa-music text-monana-amber animate-bounce"></i>
+                    <span id="musicText" class="text-xs font-bold hidden sm:inline">Música ON</span>
+                </button>
+
+                <!-- CART BUTTON -->
+                <button onclick="toggleCartModal()" class="relative bg-monana-yellow hover:bg-amber-400 text-monana-darkbrown font-bold px-4 py-2.5 rounded-full transition-transform active:scale-95 shadow-md flex items-center gap-2">
+                    <i class="fa-solid fa-cart-shopping text-lg"></i>
+                    <span class="hidden sm:inline">Pedido</span>
+                    <span id="cartBadge" class="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative bg-gradient-to-b from-amber-200 via-amber-100 to-transparent py-16 md:py-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                
+                <!-- HERO TEXT -->
+                <div class="text-center md:text-left space-y-6">
+                    <div class="inline-flex items-center gap-2 bg-yellow-300 text-monana-darkbrown font-bold px-4 py-1.5 rounded-full text-sm shadow-sm border border-yellow-400">
+                        <i class="fa-solid fa-star text-amber-600"></i> ¡100% Plátano Natural y Crujiente!
+                    </div>
+                    <h1 class="font-title text-4xl sm:text-5xl lg:text-6xl text-monana-darkbrown leading-tight drop-shadow-sm">
+                        ¡El Snack Más <span class="text-monana-amber underline decoration-wavy decoration-yellow-400">Divertido</span> y Sabroso!
+                    </h1>
+                    <p class="text-lg md:text-xl text-monana-brown/90 max-w-xl font-medium">
+                        Disfruta de nuestros Banana Chips artesanales. Sabor natural, salados, dulce canela o especiados. ¡Un bocado crujiente en cada momento!
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-2">
+                        <a href="#productos" class="w-full sm:w-auto text-center bg-monana-amber hover:bg-amber-600 text-white font-title text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                            <i class="fa-solid fa-bag-shopping mr-2"></i> Ver Sabores
+                        </a>
+                        <a href="https://wa.me/584125206778?text=Hola%20MoNaNa!%20Quiero%20hacer%20un%20pedido%20de%20Banana%20Chips" target="_blank" class="w-full sm:w-auto text-center bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i> Pedir por WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- HERO LOGO MASCOT DISPLAY -->
+                <div class="flex justify-center items-center relative">
+                    <div class="absolute w-72 h-72 lg:w-96 lg:h-96 bg-yellow-300/50 rounded-full blur-3xl -z-10"></div>
+                    <div class="floating relative bg-white p-6 md:p-8 rounded-3xl shadow-2xl border-4 border-monana-yellow max-w-sm sm:max-w-md w-full text-center">
+                        <!-- MONKEY SVG LOGO LARGER DISPLAY -->
+                        <div class="w-48 h-48 sm:w-64 sm:h-64 mx-auto mb-4 relative">
+                            <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-lg">
+                                <!-- Background Glow -->
+                                <circle cx="100" cy="100" r="90" fill="#FEF3C7"/>
+                                
+                                <!-- Curved Banana Base -->
+                                <path d="M 25,135 Q 90,200 175,115 Q 155,185 25,135 Z" fill="#FACC15" stroke="#78350F" stroke-width="4"/>
+                                <path d="M 20,135 C 15,128 10,118 18,112 C 24,112 28,122 25,135 Z" fill="#65A30D" stroke="#78350F" stroke-width="3"/>
+                                <path d="M 175,115 Q 180,105 183,120 Z" fill="#78350F"/>
+                                
+                                <!-- Monkey Head -->
+                                <ellipse cx="100" cy="85" rx="42" ry="38" fill="#92400E" stroke="#451A03" stroke-width="3"/>
+                                <!-- Ears -->
+                                <circle cx="58" cy="85" r="13" fill="#92400E" stroke="#451A03" stroke-width="3"/>
+                                <circle cx="58" cy="85" r="8" fill="#FDE68A"/>
+                                <circle cx="142" cy="85" r="13" fill="#92400E" stroke="#451A03" stroke-width="3"/>
+                                <circle cx="142" cy="85" r="8" fill="#FDE68A"/>
+                                <!-- Face Patch -->
+                                <path d="M 70,85 C 70,60 85,60 100,72 C 115,60 130,60 130,85 C 130,105 115,112 100,112 C 85,112 70,105 70,85 Z" fill="#FDE68A" stroke="#78350F" stroke-width="2"/>
+                                <!-- Hair Tuft -->
+                                <path d="M 95,48 Q 100,38 105,48 Q 110,40 108,48 Z" fill="#92400E"/>
+                                <!-- Cheeks -->
+                                <circle cx="78" cy="92" r="5" fill="#F472B6" opacity="0.6"/>
+                                <circle cx="122" cy="92" r="5" fill="#F472B6" opacity="0.6"/>
+                                <!-- Happy Curved Eyes -->
+                                <path d="M 80,82 Q 87,74 94,82" fill="none" stroke="#451A03" stroke-width="3.5" stroke-linecap="round"/>
+                                <path d="M 106,82 Q 113,74 120,82" fill="none" stroke="#451A03" stroke-width="3.5" stroke-linecap="round"/>
+                                <!-- Nose & Smile -->
+                                <ellipse cx="100" cy="90" rx="3" ry="2" fill="#451A03"/>
+                                <path d="M 94,95 Q 100,102 106,95" fill="none" stroke="#451A03" stroke-width="3" stroke-linecap="round"/>
+                                <!-- Paws Hugging Banana -->
+                                <ellipse cx="78" cy="118" rx="8" ry="6" fill="#FDE68A" stroke="#78350F" stroke-width="2"/>
+                                <ellipse cx="122" cy="118" rx="8" ry="6" fill="#FDE68A" stroke="#78350F" stroke-width="2"/>
+                                <!-- Tail -->
+                                <path d="M 60,100 C 40,90 35,65 50,65 C 55,65 55,72 50,72 C 43,72 45,88 62,96 Z" fill="#92400E" stroke="#451A03" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h2 class="font-title text-2xl text-monana-brown">¡Sabor Banana Top!</h2>
+                        <p class="text-sm text-monana-darkbrown/80 font-semibold mt-1">Textura crocante e ingredientes seleccionados cuidadosamente.</p>
+                        <div class="mt-4 inline-block bg-monana-cream text-monana-brown font-bold text-xs px-3 py-1 rounded-full border border-monana-amber">
+                            🍌 Elaborado en Venezuela
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section id="productos" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <h2 class="font-title text-3xl sm:text-4xl text-monana-brown">Nuestras Variedades</h2>
+            <p class="text-monana-brown/80 font-medium mt-2">Elige tus sabores preferidos y agrégalos a tu carrito para ordenar directo a WhatsApp.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="productsContainer">
+            <!-- Dynamic products rendered via Javascript -->
+        </div>
+    </section>
+
+    <!-- MINI GAME SECTION -->
+    <section id="juego" class="py-12 bg-amber-50 border-y-4 border-monana-yellow">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <div class="inline-block bg-amber-200 text-monana-brown font-title px-4 py-1 rounded-full text-sm mb-2">
+                🎮 ATTRACCIÓN MoNaNa
+            </div>
+            <h2 class="font-title text-3xl text-monana-brown">¡Atrapa los Banana Chips!</h2>
+            <p class="text-monana-brown font-medium mb-6">Mueve al monito con las flechas o tocando la pantalla para atrapar los chips y sumar puntos.</p>
+
+            <div class="bg-white p-4 rounded-3xl shadow-xl border-4 border-monana-amber max-w-md mx-auto relative overflow-hidden">
+                <div class="flex justify-between items-center mb-3 font-title text-lg px-2">
+                    <span class="text-monana-brown">Puntos: <span id="gameScore" class="text-monana-amber">0</span></span>
+                    <button id="startGameBtn" onclick="initGame()" class="bg-monana-yellow hover:bg-amber-400 text-monana-darkbrown text-sm font-bold px-4 py-1.5 rounded-full shadow transition-all">
+                        <i class="fa-solid fa-play mr-1"></i> Jugar
+                    </button>
+                </div>
+                
+                <!-- GAME CANVAS -->
+                <canvas id="gameCanvas" width="360" height="280" class="bg-gradient-to-b from-sky-100 to-amber-100 rounded-2xl w-full border border-amber-200 cursor-pointer"></canvas>
+
+                <!-- TOUCH CONTROLS FOR MOBILE -->
+                <div class="flex justify-between mt-3 gap-2">
+                    <button onclick="moveLeft()" class="flex-1 bg-amber-200 active:bg-amber-300 py-3 rounded-xl font-bold text-monana-brown text-xl shadow-sm">
+                        👈 Izquierda
+                    </button>
+                    <button onclick="moveRight()" class="flex-1 bg-amber-200 active:bg-amber-300 py-3 rounded-xl font-bold text-monana-brown text-xl shadow-sm">
+                        Derecha 👉
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT & WHATSAPP CONTACT SECTION -->
+    <section id="nosotros" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-gradient-to-r from-monana-cream via-yellow-100 to-amber-100 rounded-3xl p-8 sm:p-12 shadow-xl border-2 border-monana-yellow grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+                <h2 class="font-title text-3xl sm:text-4xl text-monana-brown mb-4">¿Por qué elegir MoNaNa?</h2>
+                <ul class="space-y-4 font-semibold text-monana-brown">
+                    <li class="flex items-start gap-3">
+                        <div class="bg-monana-yellow p-2 rounded-full text-monana-brown text-xs mt-1">🍌</div>
+                        <span>Elaborados con plátanos verdes seleccionados del campo venezolano.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="bg-monana-yellow p-2 rounded-full text-monana-brown text-xs mt-1">✨</div>
+                        <span>Proceso de fritura limpia y baja en grasa para mayor crocancia.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="bg-monana-yellow p-2 rounded-full text-monana-brown text-xs mt-1">😋</div>
+                        <span>Empaques herméticos que conservan la frescura intacta.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- CONTACT CARD -->
+            <div id="contacto" class="bg-white p-6 sm:p-8 rounded-2xl shadow-md border border-amber-200 text-center">
+                <i class="fa-brands fa-whatsapp text-5xl text-emerald-500 mb-2 animate-bounce"></i>
+                <h3 class="font-title text-2xl text-monana-brown mb-1">Pedidos Directos</h3>
+                <p class="text-sm font-semibold text-gray-600 mb-4">¿Tienes alguna consulta o pedido especial? ¡Escríbenos!</p>
+                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 mb-4">
+                    <span class="text-xs font-bold text-emerald-700 uppercase block">Número Oficial</span>
+                    <a href="https://wa.me/584125206778" target="_blank" class="font-title text-2xl text-emerald-600 hover:underline">
+                        +58 412 5206778
+                    </a>
+                </div>
+                <a href="https://wa.me/584125206778?text=Hola%20MoNaNa,%20quisiera%20saber%20disponibilidad" target="_blank" class="block w-full bg-emerald-500 hover:bg-emerald-600 text-white font-title py-3 rounded-xl shadow transition-colors">
+                    Enviar Mensaje
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-monana-darkbrown text-monana-cream py-10 border-t-4 border-monana-yellow">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-4">
+            <div class="flex items-center justify-center gap-2">
+                <span class="font-title text-2xl text-monana-yellow">MoNaNa</span>
+                <span class="text-xs font-bold bg-monana-amber text-monana-darkbrown px-2 py-0.5 rounded">Banana Chips</span>
+            </div>
+            <p class="text-sm opacity-80 max-w-md mx-auto">
+                Disfruta del auténtico sabor crujiente de nuestros Banana Chips. Hechos con amor y la mejor calidad.
+            </p>
+            <div class="text-xs opacity-60">
+                &copy; <span id="yearSpan"></span> MoNaNa Banana Chips. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- CART MODAL -->
+    <div id="cartModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border-4 border-monana-yellow transform scale-95 transition-transform duration-300" id="cartModalContainer">
+            <div class="flex justify-between items-center border-b pb-4 mb-4">
+                <h3 class="font-title text-2xl text-monana-brown flex items-center gap-2">
+                    <i class="fa-solid fa-basket-shopping text-monana-amber"></i> Tu Pedido
+                </h3>
+                <button onclick="toggleCartModal()" class="text-gray-400 hover:text-gray-600 text-xl font-bold">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- CART ITEMS LIST -->
+            <div id="cartItemsList" class="space-y-3 max-h-60 overflow-y-auto pr-1">
+                <!-- Items dynamically injected -->
+            </div>
+
+            <!-- CART TOTAL & ACTION -->
+            <div class="border-t pt-4 mt-4 space-y-4">
+                <div class="flex justify-between font-title text-xl text-monana-darkbrown">
+                    <span>Total Estimado:</span>
+                    <span id="cartTotal">$0.00</span>
+                </div>
+                <button onclick="sendWhatsAppOrder()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-title text-lg py-3 rounded-2xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i> Enviar Pedido a WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set current year
+        document.getElementById('yearSpan').innerText = new Date().getFullYear();
+
+        // PRODUCT DATA
+        const products = [
+            { id: 1, name: "MoNaNa Clásicos", desc: "Plátano verde crujiente con el punto perfecto de sal marina.", price: 1.50, tag: "Popular", color: "bg-yellow-400", bgCard: "bg-yellow-50" },
+            { id: 2, name: "MoNaNa Dulce Canela", desc: "Sabor dulce caramelizado con un toque especiado de canela.", price: 1.75, tag: "Favorito", color: "bg-amber-500", bgCard: "bg-amber-50" },
+            { id: 3, name: "MoNaNa Picantico", desc: "Para los amantes del sabor intenso: ají y especias caribeñas.", price: 1.75, tag: "Nuevo", color: "bg-red-400", bgCard: "bg-red-50" },
+            { id: 4, name: "MoNaNa Ajo & Finas Hierbas", desc: "Toque especial de ajo tostado y finas hierbas naturales.", price: 1.80, tag: "Especial", color: "bg-emerald-400", bgCard: "bg-emerald-50" }
+        ];
+
+        let cart = [];
+
+        // RENDER PRODUCTS
+        function renderProducts() {
+            const container = document.getElementById('productsContainer');
+            container.innerHTML = products.map(p => `
+                <div class="${p.bgCard} rounded-3xl p-5 shadow-lg border-2 border-amber-200 flex flex-col justify-between hover:shadow-xl transition-all hover:-translate-y-1">
+                    <div>
+                        <div class="relative mb-4 flex justify-center items-center h-40 bg-white rounded-2xl p-4 shadow-inner overflow-hidden">
+                            <span class="absolute top-2 right-2 text-xs font-bold text-white ${p.color} px-2.5 py-1 rounded-full shadow">
+                                ${p.tag}
+                            </span>
+                            <!-- SVG BANANA CHIPS BAG -->
+                            <svg viewBox="0 0 100 120" class="h-32 drop-shadow-md">
+                                <rect x="20" y="10" width="60" height="100" rx="8" fill="#FACC15" stroke="#78350F" stroke-width="3"/>
+                                <rect x="25" y="15" width="50" height="15" fill="#F59E0B" rx="3"/>
+                                <circle cx="50" cy="65" r="22" fill="#FEF3C7" stroke="#78350F" stroke-width="2"/>
+                                <!-- Mini logo face on bag -->
+                                <ellipse cx="50" cy="62" rx="12" ry="10" fill="#92400E"/>
+                                <path d="M 42,62 C 42,50 50,50 58,62" fill="#FDE68A"/>
+                                <circle cx="46" cy="60" r="1" fill="#000"/>
+                                <circle cx="54" cy="60" r="1" fill="#000"/>
+                                <path d="M 48,64 Q 50,67 52,64" fill="none" stroke="#000" stroke-width="1"/>
+                                <text x="50" y="100" text-anchor="middle" font-size="8" font-weight="bold" fill="#78350F" font-family="Fredoka One">${p.name.split(' ')[1] || 'Chips'}</text>
+                            </svg>
+                        </div>
+                        <h3 class="font-title text-xl text-monana-brown">${p.name}</h3>
+                        <p class="text-xs text-monana-brown/80 font-medium mt-1 leading-relaxed">${p.desc}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-amber-200/60 flex items-center justify-between">
+                        <span class="font-title text-2xl text-monana-darkbrown">$${p.price.toFixed(2)}</span>
+                        <button onclick="addToCart(${p.id})" class="bg-monana-yellow hover:bg-amber-400 text-monana-darkbrown font-bold px-4 py-2 rounded-xl text-sm shadow transition-transform active:scale-90 flex items-center gap-1">
+                            <i class="fa-solid fa-plus"></i> Agregar
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // CART LOGIC
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCartUI();
+        }
+
+        function updateCartQty(id, change) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += change;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cartBadge');
+            const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+            badge.innerText = totalQty;
+
+            const cartList = document.getElementById('cartItemsList');
+            if (cart.length === 0) {
+                cartList.innerHTML = `<p class="text-center text-gray-500 py-8 font-medium">Tu carrito está vacío 🍌</p>`;
+            } else {
+                cartList.innerHTML = cart.map(item => `
+                    <div class="flex justify-between items-center bg-amber-50 p-3 rounded-2xl border border-amber-200">
+                        <div>
+                            <h4 class="font-title text-monana-brown text-sm">${item.name}</h4>
+                            <span class="text-xs text-monana-amber font-bold">$${item.price.toFixed(2)} c/u</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="updateCartQty(${item.id}, -1)" class="w-7 h-7 rounded-full bg-amber-200 font-bold text-monana-brown flex items-center justify-center">-</button>
+                            <span class="font-bold text-sm w-4 text-center">${item.qty}</span>
+                            <button onclick="updateCartQty(${item.id}, 1)" class="w-7 h-7 rounded-full bg-monana-yellow font-bold text-monana-brown flex items-center justify-center">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            const totalSum = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+            document.getElementById('cartTotal').innerText = `$${totalSum.toFixed(2)}`;
+        }
+
+        function toggleCartModal() {
+            const modal = document.getElementById('cartModal');
+            const container = document.getElementById('cartModalContainer');
+            if (modal.classList.contains('pointer-events-none')) {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                container.classList.remove('scale-95');
+                container.classList.add('scale-100');
+            } else {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                container.classList.remove('scale-100');
+                container.classList.add('scale-95');
+            }
+        }
+
+        // WHATSAPP INTEGRATION
+        function sendWhatsAppOrder() {
+            if (cart.length === 0) {
+                alert("Agrega al menos un producto a tu carrito para realizar un pedido.");
+                return;
+            }
+
+            let msg = "¡Hola MoNaNa! 🍌 Quiero realizar el siguiente pedido:\n\n";
+            cart.forEach(item => {
+                msg += `• ${item.qty}x ${item.name} - $${(item.price * item.qty).toFixed(2)}\n`;
+            });
+
+            const totalSum = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+            msg += `\n*Total Estimado: $${totalSum.toFixed(2)}*\n\n¡Gracias!`;
+
+            const encodedMsg = encodeURIComponent(msg);
+            window.open(`https://wa.me/584125206778?text=${encodedMsg}`, '_blank');
+        }
+
+        // ==========================================
+        // NEW UPBEAT TROPICAL SYNTH MUSIC (Tone.js)
+        // ==========================================
+        let isPlayingMusic = false;
+        let polySynth, bassSynth, percussionSynth, loop;
+
+        function setupAudio() {
+            // Polyphonic Synth for Tropical Lead Keys
+            polySynth = new Tone.PolySynth(Tone.Synth, {
+                oscillator: { type: "triangle" },
+                envelope: { attack: 0.02, decay: 0.1, sustain: 0.3, release: 0.4 }
+            }).toDestination();
+            polySynth.volume.value = -12;
+
+            // Bass Synth for energetic groove
+            bassSynth = new MonoSynth({
+                oscillator: { type: "sawtooth" },
+                filter: { Q: 2, type: "lowpass", rollover: -12 },
+                envelope: { attack: 0.01, decay: 0.2, sustain: 0.2, release: 0.2 }
+            }).toDestination();
+            bassSynth.volume.value = -10;
+
+            // Noise Synth for crisp tropical beat
+            percussionSynth = new Tone.MembraneSynth().toDestination();
+            percussionSynth.volume.value = -14;
+
+            // Tropical chords progression (C major - G major - A minor - F major upbeat pattern)
+            const chords = [
+                ["C4", "E4", "G4"],
+                ["G3", "B3", "D4"],
+                ["A3", "C4", "E4"],
+                ["F3", "A3", "C4"]
+            ];
+            const bassNotes = ["C2", "G2", "A2", "F2"];
+
+            let step = 0;
+            Tone.Transport.bpm.value = 118; // Catchy upbeat tempo
+
+            loop = new Tone.Loop(time => {
+                const chordIdx = Math.floor(step / 4) % 4;
+                
+                // Play chord rhythm
+                if (step % 2 === 0) {
+                    polySynth.triggerAttackRelease(chords[chordIdx], "8n", time);
+                }
+
+                // Bass pattern
+                if (step % 4 === 0 || step % 4 === 3) {
+                    bassSynth.triggerAttackRelease(bassNotes[chordIdx], "8n", time);
+                }
+
+                // Drums
+                if (step % 2 === 0) {
+                    percussionSynth.triggerAttackRelease("C1", "8n", time);
+                }
+
+                step = (step + 1) % 16;
+            }, "8n");
+        }
+
+        async function startMusicAutomatically() {
+            if (isPlayingMusic) return;
+
+            try {
+                await Tone.start();
+                if (!polySynth) {
+                    setupAudio();
+                }
+                Tone.Transport.start();
+                loop.start(0);
+                isPlayingMusic = true;
+
+                const btn = document.getElementById('musicToggleBtn');
+                const icon = document.getElementById('musicIcon');
+                const text = document.getElementById('musicText');
+
+                if (icon && text && btn) {
+                    icon.className = "fa-solid fa-volume-high text-monana-amber animate-pulse";
+                    text.innerText = "Música ON";
+                    btn.classList.add("ring-2", "ring-amber-400");
+                }
+            } catch (err) {
+                console.log("Esperando interacción del usuario para iniciar audio...");
+            }
+        }
+
+        async function toggleMusic() {
+            if (!isPlayingMusic) {
+                await startMusicAutomatically();
+            } else {
+                Tone.Transport.stop();
+                isPlayingMusic = false;
+                const btn = document.getElementById('musicToggleBtn');
+                const icon = document.getElementById('musicIcon');
+                const text = document.getElementById('musicText');
+                if (icon && text && btn) {
+                    icon.className = "fa-solid fa-volume-xmark text-gray-400";
+                    text.innerText = "Música OFF";
+                    btn.classList.remove("ring-2", "ring-amber-400");
+                }
+            }
+        }
+
+        // ==========================================
+        // MINI GAME: ATRAPA LOS BANANA CHIPS
+        // ==========================================
+        let canvas, ctx;
+        let gameScore = 0;
+        let isGameRunning = false;
+        let animationFrameId = null;
+        let chips = [];
+        let particles = [];
+
+        const player = {
+            x: 150,
+            y: 215,
+            width: 60,
+            height: 45,
+            speed: 25
+        };
+
+        function initGame() {
+            canvas = document.getElementById('gameCanvas');
+            if (!canvas) return;
+            ctx = canvas.getContext('2d');
+
+            gameScore = 0;
+            document.getElementById('gameScore').innerText = gameScore;
+            chips = [];
+            particles = [];
+            player.x = (canvas.width - player.width) / 2;
+            isGameRunning = true;
+
+            const btn = document.getElementById('startGameBtn');
+            if (btn) btn.innerText = "Reiniciar";
+
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+
+            // Add touch drag control to canvas directly
+            canvas.onmousemove = (e) => { if (e.buttons === 1) handleCanvasInput(e.clientX); };
+            canvas.ontouchmove = (e) => { if (e.touches.length > 0) handleCanvasInput(e.touches[0].clientX); };
+
+            gameLoop();
+        }
+
+        function moveLeft() {
+            if (!canvas) canvas = document.getElementById('gameCanvas');
+            player.x = Math.max(0, player.x - player.speed);
+        }
+
+        function moveRight() {
+            if (!canvas) canvas = document.getElementById('gameCanvas');
+            player.x = Math.min(canvas.width - player.width, player.x + player.speed);
+        }
+
+        function spawnChip() {
+            if (Math.random() < 0.045) {
+                chips.push({
+                    x: Math.random() * (canvas.width - 40) + 20,
+                    y: -20,
+                    radius: 12,
+                    speed: 2 + Math.random() * 2.5,
+                    rotation: Math.random() * Math.PI * 2,
+                    rotSpeed: (Math.random() - 0.5) * 0.1
+                });
+            }
+        }
+
+        function gameLoop() {
+            if (!isGameRunning) return;
+
+            updateGame();
+            drawGame();
+
+            animationFrameId = requestAnimationFrame(gameLoop);
+        }
+
+        function updateGame() {
+            spawnChip();
+
+            // Update falling banana chips
+            for (let i = chips.length - 1; i >= 0; i--) {
+                const c = chips[i];
+                c.y += c.speed;
+                c.rotation += c.rotSpeed;
+
+                // Check collision with monkey basket
+                if (
+                    c.y + c.radius >= player.y &&
+                    c.y - c.radius <= player.y + player.height &&
+                    c.x >= player.x - 5 &&
+                    c.x <= player.x + player.width + 5
+                ) {
+                    // Catch chip!
+                    gameScore += 10;
+                    document.getElementById('gameScore').innerText = gameScore;
+
+                    // Sparkle particles
+                    for (let p = 0; p < 6; p++) {
+                        particles.push({
+                            x: c.x,
+                            y: c.y,
+                            vx: (Math.random() - 0.5) * 4,
+                            vy: (Math.random() - 0.5) * 4,
+                            life: 15,
+                            color: '#FACC15'
+                        });
+                    }
+
+                    chips.splice(i, 1);
+                    continue;
+                }
+
+                // Remove chip if missed
+                if (c.y > canvas.height + 20) {
+                    chips.splice(i, 1);
+                }
+            }
+
+            // Update particle effects
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.life--;
+                if (p.life <= 0) particles.splice(i, 1);
+            }
+        }
+
+        function drawGame() {
+            // Clear canvas background
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Sky background
+            ctx.fillStyle = "#E0F2FE";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Ground floor line
+            ctx.fillStyle = "#FEF3C7";
+            ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
+
+            // Draw Basket / Player
+            ctx.save();
+            ctx.translate(player.x, player.y);
+            
+            // Basket container
+            ctx.fillStyle = "#D97706";
+            ctx.beginPath();
+            ctx.roundRect(0, 15, player.width, player.height - 15, [0, 0, 12, 12]);
+            ctx.fill();
+            ctx.strokeStyle = "#78350F";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Cute Monkey Head sitting in basket
+            ctx.fillStyle = "#92400E";
+            ctx.beginPath();
+            ctx.arc(player.width / 2, 14, 15, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Ears
+            ctx.beginPath();
+            ctx.arc(player.width / 2 - 15, 12, 5, 0, Math.PI * 2);
+            ctx.arc(player.width / 2 + 15, 12, 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Face inner patch
+            ctx.fillStyle = "#FDE68A";
+            ctx.beginPath();
+            ctx.arc(player.width / 2, 16, 9, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Eyes & Smile
+            ctx.fillStyle = "#451A03";
+            ctx.beginPath();
+            ctx.arc(player.width / 2 - 4, 14, 1.5, 0, Math.PI * 2);
+            ctx.arc(player.width / 2 + 4, 14, 1.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.strokeStyle = "#451A03";
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.arc(player.width / 2, 17, 4, 0.2, Math.PI - 0.2);
+            ctx.stroke();
+
+            ctx.restore();
+
+            // Draw Banana Chips
+            chips.forEach(c => {
+                ctx.save();
+                ctx.translate(c.x, c.y);
+                ctx.rotate(c.rotation);
+
+                // Golden Banana Chip shape
+                ctx.fillStyle = "#FACC15";
+                ctx.beginPath();
+                ctx.ellipse(0, 0, c.radius + 3, c.radius - 2, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = "#78350F";
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Chip center texture
+                ctx.fillStyle = "#F59E0B";
+                ctx.beginPath();
+                ctx.ellipse(0, 0, c.radius - 3, c.radius - 6, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.restore();
+            });
+
+            // Draw catch particles
+            particles.forEach(p => {
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        // Keyboard navigation listeners
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+                moveLeft();
+            } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+                moveRight();
+            }
+        });
+
+        // Touch / Mouse drag handler
+        function handleCanvasInput(clientX) {
+            if (!canvas) canvas = document.getElementById('gameCanvas');
+            const rect = canvas.getBoundingClientRect();
+            const touchX = clientX - rect.left;
+            const scaleX = canvas.width / rect.width;
+            player.x = Math.max(0, Math.min(canvas.width - player.width, (touchX * scaleX) - (player.width / 2)));
+        }
+
+        // Global listeners to trigger music immediately on load or first touch/scroll
+        ['click', 'pointerdown', 'touchstart', 'scroll', 'keydown'].forEach(eventType => {
+            window.addEventListener(eventType, () => {
+                if (!isPlayingMusic) {
+                    startMusicAutomatically();
+                }
+            }, { once: true });
+        });
+
+        // Initialize Render on Load
+        window.onload = function() {
+            renderProducts();
+            updateCartUI();
+            
+            // Draw initial placeholder canvas screen
+            canvas = document.getElementById('gameCanvas');
+            ctx = canvas.getContext('2d');
+            ctx.fillStyle = "#78350F";
+            ctx.font = "bold 16px Quicksand";
+            ctx.textAlign = "center";
+            ctx.fillText("Presiona 'Jugar' para iniciar", canvas.width / 2, canvas.height / 2);
+
+            // Attempt instant audio start
+            startMusicAutomatically();
+        };
+    </script>
+</body>
+</html>
